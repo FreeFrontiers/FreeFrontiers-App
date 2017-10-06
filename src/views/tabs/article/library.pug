@@ -1,0 +1,63 @@
+.animated.fadeIn
+  .card
+    .card-footer(style="border-top:none;")
+      a.card-footer-item(data-target="popuparticleadd")
+        .level.is-mobile
+          .level-left
+            .level-item
+              i(data-feather="plus")
+            .level-item
+              p Add article
+  br
+  if data.length > 0
+    each item in data
+      .card
+        header.card-header
+          p.card-header-title=item.title
+          .dropdown.is-right.is-active
+            .dropdown-trigger
+              a.card-header-icon(data-target="dropdown-"+counter)
+                i(data-feather="chevron-down")
+            .dropdown-menu(id="dropdown-"+counter).is-hidden
+              .dropdown-content
+                .menu
+                  ul.menu-list
+                    li
+                      a.level-is-mobile(data-target="articleview" data-value=item.uri)
+                        .level-left
+                          .level-item
+                            i(data-feather="eye")
+                          .level-item
+                            p View
+                    li
+                      a.level-is-mobile(data-target="popuparticleshare" data-value=item.uri)
+                        .level-left
+                          .level-item
+                            i(data-feather="share-2")
+                          .level-item
+                            p Share
+                    li
+                      a.level.is-mobile(data-target="articlesettings" data-value=counter)
+                        .level-left
+                          .level-item
+                            i(data-feather="settings")
+                          .level-item
+                            p Settings
+                    li
+                      a.level.is-mobile(data-target="articleremove" data-value=counter)
+                        .level-left
+                          .level-item
+                            i(data-feather="trash-2")
+                          .level-item
+                            p Remove
+        .card-content
+          .level.is-mobile
+            .level-item
+              p(data-downloaded data-value=item.hash)
+            .level-item
+              progress.progress.is-warning(data-progress data-value=item.hash max="1")
+            .level-item
+              p(data-downloadspeed data-value=item.hash)
+      - counter++
+  else
+    p Download something.

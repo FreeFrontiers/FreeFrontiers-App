@@ -1,0 +1,54 @@
+.animated.fadeIn
+  .card
+    header.card-header
+      .card-header-title
+        p Your account
+      .card-header-icon(style="cursor:default;")
+        i(data-feather="user")
+    .card-content
+      form(name="account")
+        .field
+          label.label Username
+          .control
+            input(name="username" type="text" value=details.username disabled).input
+        if details.name
+          .field
+            label.label Name
+            .control
+              input(name="name" type="text" value=details.name).input
+          .field
+            label.label Email
+            .control
+              input(name="email" type="text" value=details.email disabled).input
+          .field
+            label.label Password
+            .control
+              input(name="password" type="password" placeholder="******" disabled).input
+    if details.name
+      .card-footer
+        a.card-footer-item#submit
+          .level.is-mobile
+            .level-left
+              .level-item
+                i(data-feather="save")
+              .level-item
+                p Submit
+        a.card-footer-item#logout
+          .level.is-mobile
+            .level-left
+              .level-item
+                i(data-feather="log-out")
+              .level-item
+                p Logout
+    else
+      .card-footer
+        a.card-footer-item(data-target="settingregister")
+          i(data-feather="hash")
+          | Register
+        a.card-footer-item#logout
+          .level.is-mobile
+            .level-left
+              .level-item
+                i(data-feather="log-out")
+              .level-item
+                p Logout

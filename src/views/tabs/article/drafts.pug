@@ -1,0 +1,42 @@
+- var counter = 0
+.animated.fadeIn
+  if data.length > 0
+    each item in data
+      .card
+        header.card-header
+          .card-header-title
+            .level.is-mobile
+              .level-left
+                p.level-item=item.title
+          .dropdown.is-right.is-active
+            .dropdown-trigger
+              a.card-header-icon(data-target="dropdown-"+counter)
+                i(data-feather="chevron-down")
+            .dropdown-menu(id="dropdown-"+counter).is-hidden
+              .dropdown-content
+                .menu
+                  ul.menu-list
+                    li
+                      a.level.is-mobile(data-target="articledraftsedit" data-value=counter)
+                        .level-left
+                          .level-item
+                            i(data-feather="edit-2")
+                          .level-item
+                            p Edit
+                    li
+                      a.level.is-mobile(data-target="articledraftsremove" data-value=counter)
+                        .level-left
+                          .level-item
+                            i(data-feather="trash-2")
+                          .level-item
+                            p Remove
+        .card-content
+          small
+            i.date=item.created
+          p=item.description
+      br
+      - counter++
+    a.button(data-target="article.") Return
+  else
+    p No drafts found.
+    a.button(data-target="article.") Return

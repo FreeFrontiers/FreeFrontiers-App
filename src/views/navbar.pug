@@ -1,0 +1,24 @@
+
+nav.navbar.is-dark.is-unselectable.is-hidden
+  .container
+    .navbar-brand
+      a.navbar-item.is-active.brand(title="Home" data-target="home")
+        i(data-feather="mic")
+      a.navbar-item(title="Articles" data-target="article")
+        .level.is-mobile
+          .level-left
+            .level-item
+              i(data-feather="file-text")
+              p.is-hidden#article Articles
+      //- a.navbar-item(title="Videos" data-target="video")
+        .level.is-mobile
+          .level-left
+            .level-item
+              i(data-feather="play-circle")
+              p.is-hidden#video Videos
+      a.navbar-item(title="Settings" data-target="setting")
+        .level.is-mobile
+          .level-left
+            .level-item
+              i(data-feather="settings")
+              p.is-hidden#setting Settings

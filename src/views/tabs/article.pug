@@ -1,0 +1,26 @@
+//- - var article = article || false
+//- - var articleEditor = articleEditor || false
+.tabs.is-centered.is-medium.animated.fadeInDown
+  ul.has-text-centered
+    li.is-active
+      a(data-target="articleuploads") Uploads
+    li
+      a(data-target="articledownloads") Library
+#error.is-hidden
+  article.message.is-danger
+    .message-header
+      p
+        strong Error
+      button.delete(aria-label="delete" data-target="error")
+    .message-body#errormessage
+#contentcontent
+  .loader
+//- .animated.fadeIn
+  if article
+    h4 Article goes here.
+    .fadeInUpBig#contentcontent
+  else if articleEditor
+    h4 Edit & Create article.
+    .fadeInUpBig#contentcontent
+  else
+    include ./article/uploads.pug

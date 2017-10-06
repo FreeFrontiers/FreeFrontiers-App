@@ -1,0 +1,127 @@
+html {
+  background-color: rgb(40, 40, 40);
+}
+body {
+  color: whitesmoke;
+}
+.tabs a {
+  color: whitesmoke;
+}
+.tabs a:hover {
+  border-bottom-color: goldenrod;
+}
+.card {
+  background-color: rgb(50, 50, 50);
+  color: whitesmoke;
+
+}
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+  color: whitesmoke;
+  font-weight: 400;
+  line-height: 1.125;
+}
+.card-header-title {
+  color: whitesmoke;
+}
+.dropdown-content {
+  background-color: rgb(30, 30, 30)
+}
+.menu-list a {
+  color: whitesmoke;
+}
+.menu-list a:hover {
+  background-color: rgb(40, 40, 40);
+  color: rgba(245, 245, 245, 0.95);
+}
+a:hover {
+  color: rgba(245, 245, 245, 0.95);
+}
+.label {
+  color: whitesmoke;
+}
+.input[disabled], .textarea[disabled] {
+  background-color: rgb(40, 40, 40);
+  border-color: rgb(30, 30, 30);
+}
+.input, .textarea {
+  background-color:rgb(30, 30, 30);
+  border-color: rgb(50, 50, 50);
+  color: rgba(245, 245, 245, 0.95);
+}
+.card-footer {
+  border-top: 1px solid rgb(30, 30, 30);
+}
+.card-footer-item:not(:last-child) {
+  border-right: 1px solid rgb(30, 30, 30);
+}
+hr {
+  background-color: rgb(30, 30, 30);
+}
+.select select {
+  background-color: rgb(30, 30, 30);
+  border-color: rgb(50, 50, 50);
+  color: rgba(245, 245, 245, 0.95);
+}
+.checkbox:hover, .radio:hover {
+  color: rgba(245, 245, 245, 0.95);
+}
+.select:hover::after {
+  border-color: whitesmoke;
+}
+.box {
+  background-color: rgb(40, 40, 40);
+  color: whitesmoke;
+}
+.modal-card-foot, .modal-card-head {
+  background-color: rgb(50, 50, 50);
+}
+.modal-card-foot {
+  border-top: 1px solid rgb(30, 30, 30);
+}
+.modal-card-head {
+  border-bottom: 1px solid rgb(30, 30, 30);
+}
+.modal-card-title {
+  color: whitesmoke;
+}
+.modal-card-body {
+  background-color: rgb(40, 40, 40);
+}
+.button {
+  background-color: rgb(30, 30, 30);
+  color: whitesmoke;
+}
+.button.is-hovered, .button:hover {
+  color: whitesmoke;
+}
+.button.is-focused, .button:focus {
+  color: goldenrod;
+}
+.tabs.is-boxed li.is-active a {
+  background-color: rgb(30, 30, 30);
+  border-color: rgb(50, 50, 50);
+}
+.tabs ul {
+  border-bottom-color: rgb(50, 50, 50);
+}
+.tabs.is-boxed a:hover {
+  color: whitesmoke;
+  background-color: goldenrod;
+  border-bottom-color: rgb(50, 50, 50);
+}
+strong {
+  color: white;
+  font-weight: 700;
+}
+.content blockquote {
+  background-color: rgb(30, 30, 30);
+  border-left: 5px solid rgb(10, 10, 10);
+  padding: 1.25em 1.5em;
+}
+.subtitle {
+  color: white;
+}
+pre {
+  background-color: rgb(50, 50, 50);
+  color: whitesmoke;
+}

@@ -1,0 +1,115 @@
+.animated.fadeInUpBig
+  .content.has-text-centered
+    h3 Choose account type
+    .columns
+      .column
+        h5 No account
+        p.has-text-left You may use all of FreeFrontiers' functionalities without registering, however your uploads will not trend or be featured. A random unique identifier will be applied to your posts. Your IP address, hashed, and your random unique identifier will be saved on FreeFrontiers' database. 
+          strong Your random unique identifier will be used to publicly identify you.
+        .card
+          .card-footer(style="border-top:none;")
+            a.card-footer-item#registeranonymous
+              .level.is-mobile
+                .level-left
+                  .level-item
+                    i(data-feather="user-check")
+                  .level-item
+                    p Register anonymously
+      .column
+        h5 FreeFrontiers account
+        p.has-text-left A FreeFrontiers account logs in with an username & password. Email is required to register. Identifiers, specifically your email, hash of your password, your username and the full name you provide will be saved on FreeFrontiers' database. 
+          strong Your username will be used to publicly identify you.
+        .card
+          .card-footer(style="border-top:none;")
+            a.card-footer-item(data-target="register")
+              .level.is-mobile
+                .level-left
+                  .level-item
+                    i(data-feather="user-check")
+                  .level-item
+                    p Register
+    p
+      a(href="https://www.freefrontiers.net/tos" title="FreeFrontiers") Terms of Service 
+        i(data-feather="external-link" data-size="18")
+      |  & 
+      a(href="https://www.freefrontiers.net/privacy" title="FreeFrontiers") Privacy Policy 
+        i(data-feather="external-link" data-size="18")
+br
+#error.is-hidden
+  article.message.is-danger
+    .message-header
+      p
+        strong Error
+      button.delete(aria-label="delete" data-target="error")
+    .message-body#errormessage
+.animated.fadeIn.is-hidden#register
+  hr
+  .card
+    .card-content
+      form(name="register")
+        .field
+          label.label Name
+          p(class="control has-icons-right")
+            input(name="fullname" type="text" placeholder="Full name" required).input
+            span(class="icon is-small is-right")
+              //- i(class="fa fa-check")
+              i(data-feather="check")
+        .field
+          label.label Username
+          p(class="control has-icons-left has-icons-right")
+            input(name="username" type="text" placeholder="Username" required).input
+            span(class="icon is-small is-left")
+              //- i(class="fa fa-user")
+              i(data-feather="user")
+            span(class="icon is-small is-right")
+              //- i(class="fa fa-check")
+              i(data-feather="check")
+          if error
+            p(class="help is-danger")= error.username
+        .field
+          label.label Password
+          p(class="control has-icons-left has-icons-right")
+            input(name="password" type="password" placeholder="***********" id="password" required).input
+            span(class="icon is-small is-left")
+              //- i(class="fa fa-lock")
+              i(data-feather="lock")
+            span(class="icon is-small is-right")
+              //- i(class="fa fa-check")
+              i(data-feather="check")
+          p.is-warning#passwordnotallowed
+        .field.is-hidden#passwordstrength
+          p#passwordinfo
+        .field
+          label.label Confirm Password
+          p(class="control has-icons-left has-icons-right")
+            input(name="confirmPassword" type="password" placeholder="***********" id="confirmPassword" required).input
+            span(class="icon is-small is-left")
+              //- i(class="fa fa-lock")
+              i(data-feather="lock")
+            span(class="icon is-small is-right")
+              //- i(class="fa fa-check")
+              i(data-feather="check")
+        .field
+          label.label Email
+          p(class="control has-icons-left has-icons-right")
+            input(name="email" type="email" placeholder="yourname@example.com" required).input
+            span(class="icon is-small is-left")
+              //- i(class="fa fa-envelope")
+              i(data-feather="at-sign")
+            span(class="icon is-small is-right")
+              //- i(class="fa fa-check")
+              i(data-feather="check")
+          if error
+            p(class="help is-danger")
+              a(href="/recovery" name="Recover account")= error.email
+        .field
+          p.control
+            |  By clicking on 'Submit' you agree with the 
+            a(href="https://www.freefrontiers.net/tos" target="_blank" name="Read terms of service") Terms & Service
+            |  and 
+            a(href="https://www.freefrontiers.net/privacy" target="_blank" name="Read privacy policy") Privacy Policy.
+        .field.is-grouped
+          p.control
+            button.button(type="submit")#submit Submit
+          p.control
+            button(class="button is-link" type="reset") Reset

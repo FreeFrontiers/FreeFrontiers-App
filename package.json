@@ -1,0 +1,50 @@
+{
+  "build": {
+    "appId": "net.freefrontiers.app",
+    "files": [
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+
+    },
+    "mac": {
+
+    },
+    "productName": "FreeFrontiers",
+    "asar": true,
+    "copyright":"Copyright © 2017 FreeFrontiers", 
+    "publish": null
+  },
+  "name": "project-seventeen-client",
+  "version": "1.0.0",
+  "description": "FreeFrontiers Standalone",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron src/main.js",
+    "pack": "electron-builder"
+  },
+  "author": {
+    "name": "Karar Al-Remahy",
+    "email": "alremahykarar@ymail.com"
+    },
+  "license": "Apache-v2",
+  "dependencies": {
+    "localforage": "^1.5.0",
+    "markdown-it": "^8.4.0",
+    "moment": "^2.18.1",
+    "pug": "^2.0.0-rc.4",
+    "snekfetch": "3.2.9",
+    "webtorrent": "^0.98.19"
+  },
+  "devDependencies": {
+    "electron-debug": "^1.4.0",    
+    "devtron": "^1.4.0",
+    "electron": "^1.7.8",
+    "electron-builder": "^19.33.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
+}

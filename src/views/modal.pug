@@ -1,0 +1,24 @@
+.animated.fadeIn
+  .modal.is-active#modal
+    if message.endsWith('...')
+      .modal-background
+    else
+      .modal-background(data-target="modal")
+    if typeof message === 'object'
+      .modal-card
+        header.modal-card-head
+          p.modal-card-title=message.title
+        section.modal-card-body
+          !=message.body
+        footer.modal-card-foot
+          if message.action
+            button.button#modalfunction=message.action
+          button.button.is-danger(data-target="modal") Cancel
+    else if typeof message === 'string'
+      .modal-content
+        .box.content
+          p(style="word-break:break-word;")= message
+      if message.endsWith('...')
+        button.modal-close(style="margin: 2rem 0 0 0;")
+      else 
+        button.modal-close(data-target="modal" style="margin: 2rem 0 0 0;")

@@ -1,0 +1,104 @@
+.animated.fadeIn
+  .card
+    header.card-header
+      .card-header-title
+        p Application settings
+      .card-header-icon(style="cursor:default;")
+        i(data-feather="settings")
+    .card-content.content
+      form(name="application")
+        h4 Proxy
+        .field
+          label.label Automatically using your global proxy settings.
+        hr
+        h4 Theme
+        .field
+          label.label Choose theme
+          .control
+            .select
+              select(name="theme")
+                case settings.theme
+                  when 1
+                    option Default
+                    option(selected) Dark
+                  default
+                    option Default
+                    option Dark
+        hr
+        h4 Peer-to-peer
+        p Work in progress
+        //-.columns
+          .column
+            .field
+              label.label Default max upload bandwidth in kB
+              .control
+                input(name="uploadbandwidth" type="number" value=settings.uploadbandwidth).input
+          .column
+            .field
+              label.label Default max download bandwidth in kB
+              .control
+                input(name="downloadbandwidth" type="number" value=settings.downloadbandwidth).input
+        //- .columns
+          .column
+            .field
+              label.label Seed articles by default?
+              .control
+                label.checkbox
+                  input(type="checkbox" name="seedarticle" checked=settings.seedarticle)
+                  |  Enabled
+          .column
+            .field
+              label.label Download articles by default?
+              .control
+                label.checkbox
+                  input(type="checkbox" name="downloadarticle" checked=settings.downloadarticle)
+                  |  Enabled
+        hr
+        h4 Cryptocurrency mining
+        p Not yet implemented.
+        //- .columns
+          .column
+            .field
+              label.label Enable cryptocurrency mining
+              .control
+                label.checkbox
+                  input(type="checkbox" name="backgroundmining" checked=settings.backgroundmining)
+                  |  Enabled
+          .column
+            .field
+              label.label CPU usage
+              .control
+                .select
+                  select(name="cpuusage")
+                    case settings.cpuusage
+                      when 1
+                        option Low (10%)
+                        option(selected) Normal (30%)
+                        option High (60%)
+                      when 2
+                        option Low (10%)
+                        option Normal (30%)
+                        option(selected) High (60%)
+                      default
+                        option(selected) Low (10%)
+                        option Normal (30%)
+                        option High (60%)
+        hr
+        h4 Misc
+      hr
+      pre= JSON.stringify(settings)
+    .card-footer
+      a.card-footer-item#save
+        .level.is-mobile
+          .level-left
+            .level-item
+              i(data-feather="save")
+            .level-item
+              p Save
+      a.card-footer-item#reset
+        .level.is-mobile
+          .level-left
+            .level-item
+              i(data-feather="refresh-cw")
+            .level-item
+              p Reset

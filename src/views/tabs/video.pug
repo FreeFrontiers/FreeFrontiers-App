@@ -1,0 +1,13 @@
+- var video = video || false
+- var videoEditor = videoEditor || false
+.animated.fadeIn
+  .content
+    if video
+      h4 Video goes here.
+      .animated.fadeInUpBig#contentcontent
+    else if videoEditor
+      h4 Edit details & Upload video.
+      .animated.fadeInUpBig#contentcontent
+    else
+      h4 Your videos. Not available in this version.
+      .animated.fadeInUpBig#contentcontent

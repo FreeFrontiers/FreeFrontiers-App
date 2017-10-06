@@ -1,0 +1,37 @@
+.content
+  h1.is-marginless= article.title
+  p.subtitle.is-6 Posted 
+    span.date= article.created
+  p= article.description
+  .columns.is-mobile.is-gapless
+    .column.is-narrow
+      figure.image.is-48x48.is-marginless
+        img(src= article.author.img || 'img/logo-concept-2.5_mic.png' alt="Author's profile picture")
+    .column
+      - var authorLink = typeof article.author === 'object' ? article.author.username : article.author + '?anonymous'
+      p
+        a(data-value=authorLink)= 'By ' + (typeof article.author === 'object' ? article.author.name : 'Anonymous User (' + article.author + ')')
+      = typeof article.author === 'object' ? article.author.title || 'FreeFrontiers User' : 'FreeFrontiers User'
+  .content(style="word-wrap:break-word;")#articlecontent
+    .loader
+  .level
+    .level-left
+      .level-item#progress 0%
+      .level-item#uploaded 0 MB
+      .level-item#downloaded 0 MB
+  .content
+    .level.is-marginless.is-mobile
+      .level-left
+        .level-item
+          i(data-feather="message-circle")
+        .level-item
+          h3.title Comments
+    .field
+      .control.is-expanded
+        textarea(type="text" name="commentbody" placeholder="Comment..." rows="1").textarea
+      .control
+        a.button#commentbtn
+          i(data-feather="message-circle")
+          | Post
+    br
+    #comments

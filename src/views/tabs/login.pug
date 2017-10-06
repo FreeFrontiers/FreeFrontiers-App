@@ -1,0 +1,38 @@
+#error.is-hidden
+  article.message.is-danger
+    .message-header
+      p
+        strong Error
+      button.delete(aria-label="delete" data-target="error")
+    .message-body#errormessage
+br
+.card
+  header.card-header
+    .card-header-title
+      p Account
+    .card-header-icon(style="cursor:default;")
+      i(data-feather="user")
+  .card-content
+    .field
+      label.label Username
+      .control
+        input(name="username" type="text" placeholder="Username" required)#username.input
+    .field
+      label.label Password
+      .control
+        input(name="password" type="password" placeholder="Password" required)#password.input
+    .field
+      .control
+        label.checkbox
+          input(type="checkbox" name="rememberme")#rememberme
+          |  Remember me
+    .field
+      .control
+        button.button(type="submit")#login Login
+  footer.card-footer
+    a.card-footer-item
+      i(data-feather="info")
+      | Terms of Service
+    a.card-footer-item(data-target="settingregister")
+      i(data-feather="hash")
+      | Register

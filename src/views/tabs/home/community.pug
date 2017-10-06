@@ -1,0 +1,20 @@
+.animated.fadeIn
+  .content
+    if data.length > 0
+      each item in data
+        .card
+          .card-content.is-paddingless
+            .columns.is-marginless
+              if item.imagery
+                .column.is-narrow
+                  figure
+                    img(src=item.imagery alt="Image").image.is-2by1.is-marginless
+              .column
+                a(href=item.url name=item.title)
+                  h3.title= item.title
+                  h5.subtitle.date= item.created
+                = item.description
+        br
+    else
+      p Backend might be down or you're not connected to the internet. Check your connection or  
+        a(href="https://status.freefrontiers.net/") check FreeFrontiers status.

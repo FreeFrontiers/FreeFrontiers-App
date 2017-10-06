@@ -1,0 +1,216 @@
+style
+  include ../../css/codemirror/codemirror.css
+style
+  include ../../css/codemirror/3024-day.css
+case theme
+  when 'dark'
+    style.
+      .cm-s-3024-day.CodeMirror {
+        background-color: rgb(30, 30, 30);
+        color: whitesmoke;
+      }
+  default
+    style.
+      .cm-s-3024-day.CodeMirror {
+        background-color: #f5f5f5;
+      }
+style.
+    .CodeMirror {
+      height: 85vh;
+    }
+    .cm-s-3024-day span.cm-string {
+      color: goldenrod;
+    }
+    .cm-s-3024-day .CodeMirror-gutters {
+      background: palegoldenrod;
+    }
+style.
+  #drop_zone {
+    border: 2px dashed #dbdbdb;
+    /*-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;*/
+    padding: 25px;
+    margin: 1rem 0;
+    text-align: center;
+  }
+.animated.fadeIn
+  .tabs.is-small.is-boxed.is-right
+    ul
+      li.is-active
+        a(class="toggle" data-target="editview")
+          span
+            i(data-feather="edit" data-size="18")
+          span Edit
+      li
+        a(class="toggle" data-target="previewview")
+          span
+            i(data-feather="file-text" data-size="18")
+          span Preview
+  #editview.animated.fadeIn
+    form(name="articlenew")#articlenew
+      .card
+        header.card-header
+          .card-header-title Title
+          a.card-header-icon(data-target="popuparticle" data-value="Title must be more than 12 characters. This is what your url will look like and your article title.")
+            i(data-feather="help-circle")
+        .card-content
+          .field
+            p(class="control has-icons-right")
+              input(id="title" name="title" type="text" placeholder="Article..." value= data ? data.title : '').input
+              span(class="icon is-small is-right")
+                i(data-feather="check")
+      br
+      .card
+        header.card-header
+          .card-header-title Description
+          a.card-header-icon(data-target="popuparticle" data-value="A description of your article. Use this to catch the viewers eyes. Recommended length is less than 256 characters.")
+            i(data-feather="help-circle")
+        .card-content
+          .field
+            p(class="control has-icons-right")
+              input(id="description" name="description" type="text" placeholder="Description..." value= data ? data.description : '').input
+              span(class="icon is-small is-right")
+                i(data-feather="check")
+      br
+      .card
+        header.card-header
+          .card-header-title Content
+          a.card-header-icon(data-target="popuparticle" data-value="Make sure your content is over 50 characters. Uses markdown syntax. Drag the icons to the text area for easy input.")
+            i(data-feather="help-circle")
+        .card-content
+          a.button.is-small#bold(title="Bold" data-textvalue="**Bold**" draggable="true" style="margin-right:.5rem;touch-action:none;cursor:all-scroll;")
+            .level.is-mobile
+              .level-left
+                .level-item
+                  i(data-feather="bold" data-size="18")
+                .level-item
+                  p Bold
+          //- button.button(style="padding-right:1rem;")
+            a#underline(title="Underline" data-textvalue=" __Underline__" draggable="true" style="cursor:all-scroll;")
+              i(data-feather="underline") ➖
+          a.button.is-small#italic(title="Italic" data-textvalue="*Italic*" draggable="true" style="margin-right:.5rem;touch-action:none;cursor:all-scroll;")
+            .level.is-mobile
+              .level-left
+                .level-item
+                  i(data-feather="italic" data-size="18")
+                .level-item
+                  p Italic
+          a.button.is-small#link(title="Link" data-textvalue="[Click me](https://example.com)" draggable="true" style="margin-right:.5rem;touch-action:none;cursor:all-scroll;")
+            .level.is-mobile
+              .level-left
+                .level-item
+                  i(data-feather="link" data-size="18")
+                .level-item
+                  p Link
+          a.button.is-small#italic(title="Highlight / Mark" data-textvalue="\n\n@[mark](Highlight this.)\n\n" draggable="true" style="margin-right:.5rem;touch-action:none;cursor:all-scroll;")
+            .level.is-mobile
+              .level-left
+                .level-item
+                  i(data-feather="eye" data-size="18")
+                .level-item
+                  p Highlight
+          a.button.is-small#image(title="Image" data-textvalue="\n![Alternative text goes here in case image can't be loaded.](https://via.placeholder.com/1920x1080 \"Tooltip text\")\n" draggable="true" style="margin-right:.5rem;touch-action:none;cursor:all-scroll;")
+            .level.is-mobile
+              .level-left
+                .level-item
+                  i(data-feather="image" data-size="18")
+                .level-item
+                  p Image
+          a.button.is-small#film(title="Video" data-textvalue="\n\n@[video](youtube|attachment link|attachment)\n\n" draggable="true" style="margin-right:.5rem;touch-action:none;cursor:all-scroll;")
+            .level.is-mobile
+              .level-left
+                .level-item
+                  i(data-feather="film" data-size="18")
+                .level-item
+                  p Video
+          a.button.is-small#quote(title="Quote" data-textvalue="\n\n> Quote\n" draggable="true" style="margin-right:.5rem;touch-action:none;cursor:all-scroll;")
+            .level.is-mobile
+              .level-left
+                .level-item
+                  i(data-feather="message-square" data-size="18")
+                .level-item
+                  p Quote
+          a.button.is-small#list(title="Ordered list" data-textvalue="\n1. One\n2. Two\n3. Three" draggable="true" style="margin-right:.5rem;touch-action:none;cursor:all-scroll;")
+            .level.is-mobile
+              .level-left
+                .level-item
+                  i(data-feather="list" data-size="18")
+                .level-item
+                  p List
+      .field
+            p(class="control")
+              textarea(id="acontent" name="content" placeholder="### Markdown-it syntax supported.").textarea= data ? data.content : ''
+      br
+      .level.is-mobile
+        .level-left
+          .level-item
+            label.label Upload attachments
+        .level-right
+          a.level-item(data-target="popuparticle" data-value="WIP")
+            i(data-feather="help-circle")
+      .field
+        div#drop_zone(title="Drop files here")
+          .file.is-centered
+            label.file-label
+              input.file-input(type="file" id="manualinputfile")
+              span.file-cta
+                span.file-icon
+                  i(data-feather="upload")
+                span.file-label Upload files.
+        //- output#listfiles
+        .columns.is-mobile.is-centered.is-multiline#preview
+          if data
+            if data.attachments
+              - for (item = 0; item < data.attachments.length; item++)
+                .column.is-narrow
+                  .card
+                    .card-header
+                      p.card-header-title(data-attachmentval=item)= "Attachment:" + item
+                    .card-image
+                      figure.is-200x200
+                        img(src=data.attachments[item].path alt="Attachment thumbnail " + item style="width:200px;height: 200px;").image
+                    .card-footer
+                      a.card-footer-item(data-targetfile=data.attachments[item].name) Delete
+                input(name="file" + item data-file=data.attachments[item].name data-path=data.attachments[item].path data-type=data.attachments[item].type style="display:none;").is-hidden
+      br
+      .card
+        header.card-header
+          .card-header-title Tags
+          a.card-header-icon(data-target="popuparticle" data-value="You must have more than 3 tags. Make sure your tags are not just words from your title.")
+            i(data-feather="help-circle")
+        .card-content
+          .field
+            p(class="control has-icons-right")
+              input(id="tags" name="tags" type="text" placeholder="lifestyle, free speech" value= data ? data.tags : '').input
+              span(class="icon is-small is-right")
+                //- i(class="fa fa-check")
+                i(data-feather="check")
+          |By clicking on 'Publish' you agree with the 
+          a(href="/tos" target="_blank" name="Read terms of service") Terms & Service
+          |  and 
+          a(href="/privacy" target="_blank" name="Read privacy policy") Privacy Policy.
+        .card-footer
+          a.card-footer-item#publish
+            .level.is-mobile
+              .level-left
+                .level-item
+                  i(data-feather="upload-cloud")
+                .level-item
+                  p Publish
+          a.card-footer-item#draft
+            .level.is-mobile
+              .level-left
+                .level-item
+                  i(data-feather="file-plus")
+                .level-item
+                  p Draft
+          a.card-footer-item#reset
+            .level.is-mobile
+              .level-left
+                .level-item
+                  i(data-feather="refresh-cw")
+                .level-item
+                  p Reset
+  #previewview.is-hidden.animated.fadeIn
+    .content#previewMarkdown

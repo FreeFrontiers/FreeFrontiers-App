@@ -1,0 +1,72 @@
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('../fonts/FiraSans-Regular.ttf') format('truetype'); /* TTF file for CSS3 browsers */
+}
+body {
+  font-family: 'Fira Sans', sans-serif;
+  height: 100%
+}
+.is-dark {
+  background-color: rgb(30, 30, 30);
+  color: whitesmoke;
+}
+.is-dark a.navbar-item {
+  color: whitesmoke;
+}
+.is-dark a.navbar-item:hover {
+  color: #0a0a0a;
+}
+.is-dark .navbar-item.brand:hover {
+  background-color: goldenrod;
+}
+a, h4 a, h5 a, .is-dark .navbar-item.brand, .tabs li.is-active a, .tabs a:hover {
+  color: goldenrod;
+}
+.input.is-active, .input.is-focused,
+.input:active, .input:focus, .textarea.is-active,
+.textarea.is-focused, .textarea:active, .textarea:focus, .button:focus,
+.select select.is-active, .select select.is-focused, .select select:active, .select select:focus {
+  border-color: goldenrod;
+}
+input:required:invalid ~ .icon.is-right, input:focus:invalid ~ .icon.is-right {
+  visibility: hidden;
+}
+input:required:valid ~ .icon.is-right, input:focus:valid ~ .icon.is-right {
+  visibility: visible;
+  color: green;
+}
+.navbar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+a.navbar-item.is-active {
+  background-color: goldenrod !important;
+  color: whitesmoke !important;
+}
+.tabs li.is-active a {
+  border-bottom-color: goldenrod;
+}
+.loader {
+  border: 2px solid goldenrod;
+  height: 1.5em;
+  width: 1.5em;
+  border-right-color: transparent;
+  border-top-color: transparent;
+}
+.select:not(.is-multiple)::after {
+  border: 1px solid goldenrod;
+  border-right: 0;
+  border-top: 0;
+}
+.responsive-200x200 {
+  height: 200px;
+  width: 200px;
+}
+.card-image.is-200x200 {
+  max-height: 200px;
+  max-width: 200px;
+  overflow: hidden;
+}

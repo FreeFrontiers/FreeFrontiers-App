@@ -1,0 +1,78 @@
+.animated.fadeIn
+  .card
+    .card-footer(style="border-top:none;")
+      a.card-footer-item(data-target="articlenew")
+        .level.is-mobile
+          .level-left
+            .level-item
+              i(data-feather="edit")
+            .level-item
+              p New article
+      a.card-footer-item(data-target="articledrafts")
+        .level.is-mobile
+          .level-left
+            .level-item
+              i(data-feather="file")
+            .level-item
+              p Drafts
+  br
+  - var counter = 0
+  if data.length > 0
+    each item in data
+      .card
+        header.card-header
+          p.card-header-title=item.title
+          .dropdown.is-right.is-active
+            .dropdown-trigger
+              a.card-header-icon(data-target="dropdown-"+counter)
+                i(data-feather="chevron-down")
+            .dropdown-menu(id="dropdown-"+counter).is-hidden
+              .dropdown-content
+                .menu
+                  ul.menu-list
+                    li
+                      a.level.is-mobile(data-target="articleview" data-value=item.hash)
+                        .level-left
+                          .level-item
+                            i(data-feather="eye")
+                          .level-item
+                            p View
+                    li
+                      a.level.is-mobile(data-target="popuparticleshare" data-value=decodeURIComponent(item.uri).replace(/&amp;/g, '&'))
+                        .level-left
+                          .level-item
+                            i(data-feather="share-2")
+                          .level-item
+                            p Share
+                    li
+                      a.level.is-mobile(data-target="articleuploadsedit" data-value=counter)
+                        .level-left
+                          .level-item
+                            i(data-feather="edit-2")
+                          .level-item
+                            p Edit
+                    li
+                      a.level.is-mobile(data-target="articleuploadssettings" data-value=counter)
+                        .level-left
+                          .level-item
+                            i(data-feather="settings")
+                          .level-item
+                            p Settings
+                    li
+                      a.level.is-mobile(data-target="articleuploadsremove" data-value=counter)
+                        .level-left
+                          .level-item
+                            i(data-feather="trash-2")
+                          .level-item
+                            p Remove
+        .card-content
+          .level.is-mobile
+            .level-item
+              p(title=item.size + ' KB')= Number(item.size / 1048576).toFixed(2) + " MB"
+            .level-item
+              p(data-uploaded data-value=item.hash) Loading...
+            .level-item
+              p(data-uploadspeed data-value=item.hash) 0 kB/s
+      - counter++
+  else
+    p Upload something.

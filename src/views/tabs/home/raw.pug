@@ -1,0 +1,28 @@
+.animated.fadeIn
+  .content
+    if data.length > 0
+      each item in data
+        - var authorLink = typeof item.author === 'object' ? item.author.username : item.author
+        .card
+          .card-content
+            a(data-target="articleview" data-value=item.url)
+              h3.title.is-marginless= item.title
+              h5.subtitle.is-marginless.date=item.created
+            small
+              .level.is-mobile(style="overflow:auto;")
+                .level-left
+                  .level-item
+                    i(data-feather="user" data-size="18")
+                  .level-item
+                    a(data-value=authorLink)= typeof item.author === 'object' ? item.author.name : item.author
+                  .level-item
+                    i(data-feather="download" data-size="18")
+                  .level-item= Number(item.size / 1048576).toFixed(2) + ' MB'
+                  .level-item
+                    i(data-feather="trending-up" data-size="18")
+                  .level-item= item.views
+            p= item.description
+        br
+    else
+      p Backend might be down or you're not connected to the internet. Check your connection or 
+        a(href="https://status.freefrontiers.net/") check FreeFrontiers status page.
