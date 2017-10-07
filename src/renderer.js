@@ -564,7 +564,8 @@
                         if (e) return console.error(e)
                         fs.writeFile(metadataFile, `FreeFrontiers Article\n\nTitle: ${article.title}\nDescription: ${article.description}\nAttachments: ${article.attachments ? article.attachments.length : 'none'}\nAuthor: ${account.username}\nCreated: ${Date(articleFile.created)}`, (e) => {
                           if (e) return console.error(e)
-                          let files = article.attachments.path || []
+                          let files = []
+                          if (article.attachments) files.push(article.attachments.path)
                           files.push(articleFilePath, metadataFile)
                           client.seed(files, {name: articleDirName}, (torrent) => {
                             fs.writeFile(path.join(__dirname, '..', 'uploads', torrent.infoHash + '.torrent'), torrent.torrentFile, () => {
