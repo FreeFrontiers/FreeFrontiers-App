@@ -579,7 +579,7 @@
                                   hash: torrent.infoHash,
                                   size: torrent.length,
                                   content: article.content,
-                                  attachments: article.attachments.names
+                                  attachments: article.attachments ? article.attachments.names : null
                                 }).then(res => {
                                   console.log(res.body)
                                   if (res.body.status === '200' && !res.body.error) {
