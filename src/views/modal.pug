@@ -1,6 +1,6 @@
 .animated.fadeIn
   .modal.is-active#modal
-    if typeof message === 'string' ? message.endsWith('...') : true
+    if typeof message === 'string' ? message.endsWith('...') : false
       .modal-background
     else
       .modal-background(data-target="modal")
@@ -18,7 +18,7 @@
       .modal-content
         .box.content
           p(style="word-break:break-word;")= message
-      if typeof message === 'string' ? message.endsWith('...') : true
+      if typeof message === 'string' ? message.endsWith('...') : false
         button.modal-close(style="margin: 2rem 0 0 0;")
       else 
         button.modal-close(data-target="modal" style="margin: 2rem 0 0 0;")
