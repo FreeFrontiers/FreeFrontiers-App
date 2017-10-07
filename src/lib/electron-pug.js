@@ -1,5 +1,6 @@
 'use strict'
 console.time('electron-pug.js load')
+console.time('electorn-pug fully load')
 const {app, protocol} = require('electron')
 const fs = require('fs')
 const path = require('path')
@@ -40,6 +41,7 @@ const getPath = url => {
  */
 const interceptCB = error => {
   if (!error) {
+    console.timeEnd('electorn-pug fully load')
     console.log('Pug interceptor registered successfully')
   } else {
     console.error('Pug interceptor failed:', error)

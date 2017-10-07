@@ -6,15 +6,11 @@
       "node_modules/**/*",
       "package.json"
     ],
-    "win": {
-
-    },
-    "mac": {
-
-    },
+    "win": {},
+    "mac": {},
     "productName": "FreeFrontiers",
     "asar": true,
-    "copyright":"Copyright © 2017 FreeFrontiers", 
+    "copyright": "Copyright © 2017 FreeFrontiers",
     "publish": null
   },
   "name": "freefrontiers-app",
@@ -28,7 +24,7 @@
   "author": {
     "name": "Karar Al-Remahy",
     "email": "alremahykarar@ymail.com"
-    },
+  },
   "license": "Apache-2.0",
   "dependencies": {
     "localforage": "^1.5.0",
@@ -39,10 +35,10 @@
     "webtorrent": "^0.98.19"
   },
   "devDependencies": {
-    "electron-debug": "^1.4.0",    
+    "electron-debug": "^1.4.0",
     "devtron": "^1.4.0",
     "electron": "^1.7.8",
-    "electron-builder": "^19.33.0",
+    "electron-builder": "^19.34.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-standard": "^3.0.1"
