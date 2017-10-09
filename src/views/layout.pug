@@ -22,18 +22,9 @@ html(lang="en")
         .content.has-text-centered
           h1 Initialising FreeFrontiers...
           .loader(style="border:5px solid goldenrod;height:10.5em;width: 10.5em;border-right-color:transparent;border-top-color:transparent;margin:auto;")
-      block content
     #bottom
-    block bottom
     script(src="./js/feather.min.js")
-    script(async).
-      require('../renderer.js')
     script.
       console.timeEnd('body')
-       document.addEventListener("keydown", function (e) {
-      	if (e.which === 123) {
-      		require('remote').getCurrentWindow().toggleDevTools();
-      	} else if (e.which === 116) {
-      		location.reload();
-      	}
-      })
+script(async).
+  require('../renderer.js')
