@@ -27,18 +27,18 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "localforage": "^1.5.0",
+    "localforage": "^1.5.1",
     "markdown-it": "^8.4.0",
     "moment": "^2.18.1",
     "pug": "^2.0.0-rc.4",
-    "snekfetch": "3.2.9",
+    "snekfetch": "devsnek/snekfetch#a07755e",
     "webtorrent": "^0.98.19"
   },
   "devDependencies": {
     "electron-debug": "^1.4.0",
     "devtron": "^1.4.0",
     "electron": "^1.7.8",
-    "electron-builder": "^19.34.1",
+    "electron-builder": "^19.35.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-standard": "^3.0.1"
