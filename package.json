@@ -31,7 +31,7 @@
     "markdown-it": "^8.4.0",
     "moment": "^2.18.1",
     "pug": "^2.0.0-rc.4",
-    "snekfetch": "devsnek/snekfetch#a07755e",
+    "snekfetch": "3.2.9",
     "webtorrent": "^0.98.19"
   },
   "devDependencies": {
