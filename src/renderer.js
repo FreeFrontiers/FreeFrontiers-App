@@ -17,13 +17,13 @@ window.addEventListener('DOMContentLoaded', () => {
   const path = require('path')
   console.timeEnd('path')
   console.time('lf')
-  const lf = require('../db.js').db
+  const lf = window.require('../db.js').db
   console.timeEnd('lf')
   console.time('views')
-  const views = require('../module/views.js')
+  const views = window.require('../module/views.js')
   console.timeEnd('views')
   console.time('webtorrent')
-  const Webtorrent = require('webtorrent')
+  const Webtorrent = window.require('webtorrent')
   console.timeEnd('webtorrent')
   console.time('client')
   const client = new Webtorrent()

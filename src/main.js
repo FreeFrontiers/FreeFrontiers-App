@@ -6,7 +6,7 @@ const autoUpdater = require('electron-updater').autoUpdater
 const path = require('path')
 const url = require('url')
 require('./lib/electron-pug')({pretty: true})
-require('electron-debug')({enabled: true})
+// require('electron-debug')
 
 ipcMain.on('close-main-window', () => {
   mainWindow.close()
