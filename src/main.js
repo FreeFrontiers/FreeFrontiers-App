@@ -1,28 +1,26 @@
 'use strict'
 
-const electron = require('electron')
-// Module to control application life.
-const app = electron.app
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow
-
-// const {autoUpdater} = require('electron')
-// autoUpdater.addListener('update-available', (event) => {
-// })
-// autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
-// })
-// autoUpdater.addListener('error', (error) => {
-// })
-// autoUpdater.addListener('checking-for-update', (event) => {
-// })
-// autoUpdater.addListener('update-not-available', (event) => {
-// })
+const {BrowserWindow, app, Menu, shell, ipcMain, dialog} = require('electron')
+const autoUpdater = require('electron-updater').autoUpdater
 
 const path = require('path')
 const url = require('url')
 require('./lib/electron-pug')({pretty: true})
 require('electron-debug')({enabled: true})
-const menu = new electron.Menu()
+
+ipcMain.on('close-main-window', () => {
+  mainWindow.close()
+})
+
+ipcMain.on('minimize-main-window', () => {
+  mainWindow.minimize()
+})
+
+ipcMain.on('maximize-main-window', () => {
+  if (mainWindow.isMaximized()) {
+    mainWindow.unmaximize()
+  } else mainWindow.maximize()
+})
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -31,6 +29,7 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
+    frame: false,
     height: 600,
     width: 800,
     minHeight: 600,
@@ -59,18 +58,61 @@ function createWindow () {
   wc.on('will-navigate', (e, url) => {
     if (url !== wc.getURL()) {
       e.preventDefault()
-      electron.shell.openExternal(url)
+      shell.openExternal(url)
     }
   })
 
-  menu.append(new electron.MenuItem({
-    label: 'Toggle Console',
-    accelerator: 'CmdOrCtrl+Alt+I',
-    click: () => { mainWindow.webContents.openDevTools() }
-  }))
+  // Create the Application's main menu
+  let template = [{
+    label: 'Application',
+    submenu: [
+      { label: 'Quit', accelerator: 'Command+Q', click: () => { app.quit() } },
+      { label: 'Developer Console', accelerator: 'CmdOrCtrl+Alt+I', click: () => { wc.toggleDevTools() } },
+      { label: 'Check for updates', click: () => { autoUpdater.checkForUpdates() } }
+    ]}, {
+    label: 'Edit',
+    submenu: [
+      { label: 'Undo', accelerator: 'CmdOrCtrl+Z', selector: 'undo:' },
+      { label: 'Redo', accelerator: 'Shift+CmdOrCtrl+Z', selector: 'redo:' },
+      { type: 'separator' },
+      { label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
+      { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
+      { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
+      { label: 'Select All', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:' }
+    ]}
+  ]
+
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template))
+
   mainWindow.on('unresponsive', () => {
-    // mainw
+    dialog.showMessageBox({
+      type: 'info',
+      message: 'Window is unresponsive, would you like to reload application?',
+      buttons: ['Wait', 'Reload']
+    }, onUnresponsiveHandle)
   })
+  function onUnresponsiveHandle (number) {
+    if (number === 0) return
+    mainWindow.reload(true)
+  }
+
+  autoUpdater.checkForUpdates()
+  autoUpdater.on('download-progress', (progressObj) => {
+    wc.send('downloadUpdateProgress', progressObj)
+  })
+
+  autoUpdater.on('update-downloaded', (info) => {
+    dialog.showMessageBox({
+      type: 'info',
+      message: 'Update is ready! Want to apply update?',
+      buttons: ['No', 'Restart']
+    }, onUpdateReadyHandle)
+  })
+
+  function onUpdateReadyHandle (number) {
+    if (number === 0) return
+    autoUpdater.quitAndInstall()
+  }
 }
 
 // This method will be called when Electron has finished

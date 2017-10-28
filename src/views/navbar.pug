@@ -1,6 +1,6 @@
 
 nav.navbar.is-dark.is-unselectable.is-hidden
-  .container
+  .container(style="-webkit-app-region:drag;")
     .navbar-brand
       a.navbar-item.is-active.brand(title="Home" data-target="home")
         i(data-feather="mic")
@@ -22,3 +22,15 @@ nav.navbar.is-dark.is-unselectable.is-hidden
             .level-item
               i(data-feather="settings")
               p.is-hidden#setting Settings
+      .level.is-mobile(style="-webkit-app-region:drag;position:absolute;right:0;top:15px;")
+        .level-left
+        .level-right
+          a.level-item.is-hidden
+            i(data-feather="download" data-size="18")
+            p#updateprogress
+          a.level-item#appminimize
+            i(data-feather="minus" data-size="18")
+          a.level-item#appmaximize
+            i(data-feather="plus" data-size="18")
+          a.level-item#appquit
+            i(data-feather="x" data-size="18")

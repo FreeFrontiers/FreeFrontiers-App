@@ -4,22 +4,53 @@
     "files": [
       "src/**/*",
       "node_modules/**/*",
-      "package.json"
+      "package.json",
+      "LICENSE"
     ],
-    "win": {},
-    "mac": {},
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "perMachine": true
+    },
+    "mac": {
+      "category": "public.app-category.social-networking",
+      "target": [
+        "default"
+      ]
+    },
+    "linux": {
+      "category": "Network",
+      "target": [
+        "tar.gz"
+      ]
+    },
     "productName": "FreeFrontiers",
     "asar": true,
+    "asarUnpack": [
+      "**/node_modules/7zip-bin-linux/**/*",
+      "**/node_modules/7zip-bin-mac/**/*",
+      "**/node_modules/7zip-bin-win/**/*"
+    ],
     "copyright": "Copyright © 2017 FreeFrontiers",
-    "publish": null
+    "publish": [{
+      "provider": "github",
+      "owner": "FreeFrontiers",
+      "repo": "FreeFrontiers-App"
+  }]
   },
   "name": "freefrontiers-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "FreeFrontiers Standalone",
   "main": "src/main.js",
   "scripts": {
     "start": "electron src/main.js",
-    "pack": "electron-builder"
+    "mac": "electron-builder -m default",
+    "windows": "electron-builder -w nsis",
+    "linux": "electron-builder -l tar.gz",
+    "dist": "electron-builder -mwl"
   },
   "author": {
     "name": "Karar Al-Remahy",
@@ -27,18 +58,19 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "localforage": "^1.5.1",
+    "localforage": "^1.5.2",
     "markdown-it": "^8.4.0",
-    "moment": "^2.18.1",
+    "moment": "^2.19.1",
     "pug": "^2.0.0-rc.4",
     "snekfetch": "3.2.9",
-    "webtorrent": "^0.98.19"
+    "webtorrent": "^0.98.20",
+    "electron-updater": "^2.15.0"
   },
   "devDependencies": {
     "electron-debug": "^1.4.0",
     "devtron": "^1.4.0",
-    "electron": "^1.7.8",
-    "electron-builder": "^19.35.1",
+    "electron": "^1.7.9",
+    "electron-builder": "^19.42.2",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-standard": "^3.0.1"

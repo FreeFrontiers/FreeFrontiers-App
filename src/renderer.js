@@ -17,13 +17,13 @@ window.addEventListener('DOMContentLoaded', () => {
   const path = require('path')
   console.timeEnd('path')
   console.time('lf')
-  const lf = window.require('../db.js').db
+  const lf = require('../db.js').db
   console.timeEnd('lf')
   console.time('views')
-  const views = window.require('../module/views.js')
+  const views = require('../module/views.js')
   console.timeEnd('views')
   console.time('webtorrent')
-  const Webtorrent = window.require('webtorrent')
+  const Webtorrent = require('webtorrent')
   console.timeEnd('webtorrent')
   console.time('client')
   const client = new Webtorrent()
@@ -32,9 +32,22 @@ window.addEventListener('DOMContentLoaded', () => {
   console.time('settings db.js')
   const settings = window.require('../db.js').settings
   console.timeEnd('settings db.js')
-
+  console.time('ipcRenderer')
+  const { ipcRenderer } = require('electron')
+  console.timeEnd('ipcRenderer')
   console.time('Done loading')
   let url = 'https://www.freefrontiers.net'
+
+  let dir = {
+    tempDirectory: path.join(require('os').tmpdir(), '/ffAppTemp'),
+    homeDir: path.join(require('os').homedir(), '/FreeFrontiers'),
+    downloads: path.join(require('os').homedir(), '/FreeFrontiers', '/Downloads'),
+    uploads: path.join(require('os').homedir(), '/FreeFrontiers', '/Uploads')
+  }
+  if (!fs.existsSync(dir.homeDir)) {
+    console.log('Initializing FreeFrontiers directory.')
+    fs.mkdirSync(dir.homeDir)
+  }
 
   console.time('lf => articleuploads')
   lf.getItem('articleuploads').then(res => {
@@ -86,16 +99,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
   console.time("document.querySelectorAll('a.navbar-item[data-target]').forEach")
   document.querySelectorAll('a.navbar-item[data-target]').forEach(element => {
-    // let $target = document.getElementById(element.dataset.target)
-    // if ($target) {
-    //   let mouseover = element.addEventListener('mouseover', (event) => {
-    //     $target.classList.remove('is-hidden')
-    //   })
-    //   let mouseout = element.addEventListener('mouseout', (event) => {
-    //     $target.classList.add('is-hidden')
-    //   })
-    //   active.events.push(mouseover, mouseout)
-    // }
+    let $target = document.getElementById(element.dataset.target)
+    if ($target) {
+      element.addEventListener('mouseover', (event) => {
+        $target.classList.remove('is-hidden')
+      })
+      element.addEventListener('mouseout', (event) => {
+        $target.classList.add('is-hidden')
+      })
+      // active.events.push(mouseover, mouseout)
+    }
     element.addEventListener('click', (event) => {
       document.querySelectorAll('a.navbar-item[data-target]').forEach(element => {
         element.classList.remove('is-active')
@@ -211,13 +224,12 @@ window.addEventListener('DOMContentLoaded', () => {
               // message is a magneturi
               if (typeof message === 'string') {
                 switchToView('popuparticle', 'Please wait...')
-                let downloadsDir = path.join(__dirname, '..', 'downloads')
-                if (!fs.existsSync(downloadsDir)) {
+                if (!fs.existsSync(dir.downloads)) {
                   console.log('Initializing downloads directory.')
-                  fs.mkdirSync(downloadsDir)
+                  fs.mkdirSync(dir.downloads)
                 }
-                client.add(message, (torrent) => {
-                  fs.writeFile(path.join(__dirname, '..', 'downloads', torrent.infoHash + '.torrent'), torrent.torrentFile, () => {
+                client.add(message, {path: dir.downloads}, (torrent) => {
+                  fs.writeFile(path.join(dir.downloads, torrent.infoHash + '.torrent'), torrent.torrentFile, () => {
                     let metadata = torrent.files.find((file) => {
                       return file.name.endsWith('article.json')
                     })
@@ -229,7 +241,7 @@ window.addEventListener('DOMContentLoaded', () => {
                           title: articleFile.title,
                           author: articleFile.author,
                           uri: message,
-                          torrentFilePath: path.join(__dirname, '..', 'downloads', torrent.infoHash + '.torrent'),
+                          torrentFilePath: path.join(dir.downloads, torrent.infoHash + '.torrent'),
                           size: torrent.length,
                           hash: torrent.infoHash,
                           downloaded: Date.now()
@@ -546,13 +558,12 @@ window.addEventListener('DOMContentLoaded', () => {
                   } else {
                     switchToView('popuparticle', 'Creating torrent...')
                     let articleDirName = Date.now().toString()
-                    let uploadsDir = path.join(__dirname, '..', 'uploads')
-                    let articleDir = path.join(__dirname, '..', 'uploads', articleDirName)
-                    let articleFilePath = path.join(__dirname, '..', 'uploads', articleDirName, 'article.json')
-                    let metadataFile = path.join(__dirname, '..', 'uploads', articleDirName, 'metadata.nfo')
-                    if (!fs.existsSync(uploadsDir)) {
+                    let articleDir = path.join(dir.uploads, articleDirName)
+                    let articleFilePath = path.join(dir.uploads, articleDirName, 'article.json')
+                    let metadataFile = path.join(dir.uploads, articleDirName, 'metadata.nfo')
+                    if (!fs.existsSync(dir.uploads)) {
                       console.log('Initializing uploads directory.')
-                      fs.mkdirSync(uploadsDir)
+                      fs.mkdirSync(dir.uploads)
                     }
                     fs.mkdirSync(articleDir)
                     let articleFile = {
@@ -570,8 +581,8 @@ window.addEventListener('DOMContentLoaded', () => {
                         let files = []
                         if (article.attachments) files.push(article.attachments.path)
                         files.push(articleFilePath, metadataFile)
-                        client.seed(files, {name: articleDirName}, (torrent) => {
-                          fs.writeFile(path.join(__dirname, '..', 'uploads', torrent.infoHash + '.torrent'), torrent.torrentFile, () => {
+                        client.seed(files, {path: dir.uploads, name: articleDirName}, (torrent) => {
+                          fs.writeFile(path.join(dir.uploads, torrent.infoHash + '.torrent'), torrent.torrentFile, () => {
                             lf.getItem('cookie').then(cookie => {
                               switchToView('popuparticle', 'Contacting server...')
                               snek.post(url + '/article/new').set('Cookie', cookie).send({
@@ -592,7 +603,7 @@ window.addEventListener('DOMContentLoaded', () => {
                                     torrentPath: torrent.path,
                                     size: torrent.length,
                                     hash: torrent.infoHash,
-                                    torrentFilePath: path.join(__dirname, '..', 'uploads', torrent.infoHash + '.torrent'),
+                                    torrentFilePath: path.join(dir.uploads, torrent.infoHash + '.torrent'),
                                     uri: decodeURIComponent(torrent.magnetURI).replace(/&amp;/g, '&'),
                                     url: res.body.url
                                   }
@@ -1064,12 +1075,23 @@ window.addEventListener('DOMContentLoaded', () => {
   // Open window
   switchToView()
   console.timeEnd('Done loading')
-})
 
-document.addEventListener('keydown', (e) => {
-  if (e.which === 123) {
-    require('electron').remote.getCurrentWindow().toggleDevTools()
-  } else if (e.which === 116) {
-    location.reload()
-  }
+  document.getElementById('appminimize').addEventListener('click', () => {
+    ipcRenderer.send('minimize-main-window')
+  })
+
+  document.getElementById('appmaximize').addEventListener('click', () => {
+    ipcRenderer.send('maximize-main-window')
+  })
+
+  document.getElementById('appquit').addEventListener('click', () => {
+    ipcRenderer.send('close-main-window')
+  })
+
+  ipcRenderer.on('downloadUpdateProgress', (progressObj) => {
+    if (document.getElementById('updateprogress')) {
+      document.getElementById('updateprogress').parentElement.classList.remove('is-hidden')
+      document.getElementById('updateprogress').innerText = Number(progressObj.percent).toFixed(2) + '%'
+    } else console.log(progressObj)
+  })
 })
