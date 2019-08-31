@@ -63,7 +63,7 @@
     "moment": "^2.19.1",
     "pug": "^2.0.0-rc.4",
     "snekfetch": "3.2.9",
-    "webtorrent": "^0.98.20",
+    "webtorrent": "^0.107.6",
     "electron-updater": "^2.15.0"
   },
   "devDependencies": {
