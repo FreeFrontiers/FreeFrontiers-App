@@ -59,7 +59,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "localforage": "^1.5.2",
-    "markdown-it": "^8.4.0",
+    "markdown-it": "^10.0.0",
     "moment": "^2.19.1",
     "pug": "^2.0.0-rc.4",
     "snekfetch": "3.2.9",
